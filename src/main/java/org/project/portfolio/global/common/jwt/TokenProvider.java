@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.project.portfolio.domain.user.domain.PrincipalDetails;
 import org.project.portfolio.domain.user.exception.InvalidRefreshToken;
 import org.project.portfolio.domain.user.service.PrincipalDetailsService;
+import org.project.portfolio.global.common.util.RedisUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,6 +36,8 @@ import org.springframework.stereotype.Component;
 public class TokenProvider implements InitializingBean {
 
     private final PrincipalDetailsService principalDetailsService;
+    private final RedisUtil redisUtil;
+
     private static final String AUTHORITIES_KEY = "auth";
     private static final String ACCESS_KEY = "access";
     private static final String REFRESH_KEY = "refresh";
@@ -62,6 +65,10 @@ public class TokenProvider implements InitializingBean {
         return createToken(id, ACCESS_KEY, accessTokenExpirationTime, authentication);
     }
 
+    public String createRefreshToken(Long id, Authentication authentication) {
+        return createToken(id, REFRESH_KEY, refreshTokenExpirationTime, authentication);
+    }
+
     private String createToken(Long id, String type, int expirationTime,
             Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
@@ -84,15 +91,14 @@ public class TokenProvider implements InitializingBean {
                 .compact();
 
         if (type.equals(REFRESH_KEY)) {
-            //redis 저장
-//            redisUtil.setRefreshToken(id, token, expirationTime);
+            redisUtil.setRefreshToken(id, token, expirationTime);
         }
 
         return token;
     }
 
     public void deleteRefreshToken(Long id) {
-//        redisUtil.delete(id.toString());
+        redisUtil.delete(id.toString());
     }
 
     public String getTokenUserId(String token) {

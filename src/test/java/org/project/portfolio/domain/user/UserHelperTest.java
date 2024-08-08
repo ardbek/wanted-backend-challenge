@@ -14,7 +14,7 @@ import org.project.portfolio.domain.user.exception.DuplicateNickname;
 import org.project.portfolio.domain.user.exception.DuplicateUser;
 import org.project.portfolio.domain.user.helper.UserHelper;
 import org.project.portfolio.domain.user.repository.UserRepository;
-import org.project.portfolio.global.common.ValidationUtil;
+import org.project.portfolio.global.common.util.ValidationUtil;
 
 public class UserHelperTest {
 

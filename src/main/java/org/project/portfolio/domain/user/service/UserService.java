@@ -44,13 +44,14 @@ public class UserService {
         return userMapper.toUserIdResponseDTO(userRepository.save(user).getId());
     }
 
+    @Transactional
     public TokenResponse signin(UserSignInRequestDTO signinRequest) {
         User user = userHelper.findForSignIn(signinRequest);
         Authentication authentication = userHelper.userAuthorizationInput(user);
 
         String accessToken = tokenProvider.createAccessToken(user.getId(), authentication);
-//        final String refreshToken = tokenProvider.createRefreshToken(user.getId(), authentication);
+        final String refreshToken = tokenProvider.createRefreshToken(user.getId(), authentication);
 
-        return userMapper.toTokenResponse(accessToken, accessToken);
+        return userMapper.toTokenResponse(accessToken, refreshToken);
     }
 }

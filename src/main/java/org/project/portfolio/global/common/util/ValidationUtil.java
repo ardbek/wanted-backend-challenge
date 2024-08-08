@@ -1,4 +1,4 @@
-package org.project.portfolio.global.common;
+package org.project.portfolio.global.common.util;
 
 import org.springframework.stereotype.Component;
 

@@ -10,7 +10,7 @@ import org.project.portfolio.domain.user.exception.MismatchPassword;
 import org.project.portfolio.domain.user.exception.UserNotFound;
 import org.project.portfolio.domain.user.repository.UserRepository;
 import org.project.portfolio.domain.user.service.PrincipalDetailsService;
-import org.project.portfolio.global.common.ValidationUtil;
+import org.project.portfolio.global.common.util.ValidationUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
