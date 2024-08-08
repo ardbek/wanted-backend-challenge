@@ -17,7 +17,7 @@ public enum UserErrorCode implements BaseErrorCode {
     DUPLICATE_USER(BAD_REQUEST, "USER_400_1", "이미 존재하는 유저입니다."),
     DUPLICATE_EMAIL(BAD_REQUEST, "USER_400_2","중복된 이메일입니다."),
     DUPLICATE_NICKNAME(BAD_REQUEST, "USER_400_3","중복된 이름입니다."),
-    MISMATCH_PASSWORD(BAD_REQUEST, "USER_400_4","중복된 이름입니다."),
+    MISMATCH_PASSWORD(BAD_REQUEST, "USER_400_4","잘못된 비밀번호입니다."),
     INVALID_REFRESH_TOKEN(BAD_REQUEST,"ADMIN_400_1","리프레시 토큰이 아닙니다.")
     ;
 
