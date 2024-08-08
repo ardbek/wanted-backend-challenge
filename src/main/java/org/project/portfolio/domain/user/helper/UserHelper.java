@@ -82,7 +82,7 @@ public class UserHelper {
     }
 
     public Authentication userAuthorizationInput(User user) {
-        UserDetails userDetails = principalDetailsService.loadUserByUsername(user.getEmail());
+        UserDetails userDetails = principalDetailsService.loadUserByUserId(user.getId());
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, "",
                 userDetails.getAuthorities());
 
