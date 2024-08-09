@@ -1,10 +1,13 @@
 package org.project.portfolio.domain.post.helper;
 
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.project.portfolio.domain.post.domain.Post;
 import org.project.portfolio.domain.post.dto.request.PostCreateDTO;
+import org.project.portfolio.domain.post.dto.request.PostUpdateDTO;
 import org.project.portfolio.domain.post.exception.InvalidContentException;
 import org.project.portfolio.domain.post.exception.InvalidTitleException;
+import org.project.portfolio.domain.post.exception.PostNotFound;
 import org.project.portfolio.domain.post.mapper.PostMapper;
 import org.project.portfolio.domain.post.repository.PostRepository;
 import org.project.portfolio.domain.user.domain.PrincipalDetails;
@@ -35,4 +38,19 @@ public class PostHelper {
             throw InvalidContentException.EXCEPTION;
         }
     }
+
+    public Long updatePost(PostUpdateDTO postUpdateDTO, PrincipalDetails principalDetails) {
+        Post updatePost = postMapper.toEntity(postUpdateDTO, principalDetails.getUser());
+        return postRepository.save(updatePost).getId();
+    }
+
+    public void isUpdatable(Long id) {
+        Optional<Post> post = postRepository.findById(id);
+        if(post.isEmpty()) {
+            throw PostNotFound.EXCEPTION;
+        }
+
+        
+    }
+
 }

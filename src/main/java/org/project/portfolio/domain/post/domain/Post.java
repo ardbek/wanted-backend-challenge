@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.project.portfolio.domain.post.dto.request.PostCreateDTO;
+import org.project.portfolio.domain.post.dto.request.PostUpdateDTO;
 import org.project.portfolio.domain.user.domain.User;
 import org.project.portfolio.global.common.entity.BaseEntity;
 
@@ -49,6 +50,14 @@ public class Post extends BaseEntity {
                 .content(postCreateDTO.content())
                 .user(user)
                 .build();
+    }
+
+    public static Post of(PostUpdateDTO postUpdateDTO, User user) {
+        return Post.builder()
+            .title(postUpdateDTO.title())
+            .content(postUpdateDTO.content())
+            .user(user)
+            .build();
     }
 
 

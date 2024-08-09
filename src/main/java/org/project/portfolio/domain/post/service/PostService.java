@@ -2,6 +2,7 @@ package org.project.portfolio.domain.post.service;
 
 import lombok.RequiredArgsConstructor;
 import org.project.portfolio.domain.post.dto.request.PostCreateDTO;
+import org.project.portfolio.domain.post.dto.request.PostUpdateDTO;
 import org.project.portfolio.domain.post.dto.response.PostIdResponse;
 import org.project.portfolio.domain.post.helper.PostHelper;
 import org.project.portfolio.domain.post.mapper.PostMapper;
@@ -21,5 +22,13 @@ public class PostService {
         postHelper.validateContent(postCreateDTO.content());
         
         return postMapper.toPostIdResponse(postHelper.createPost(postCreateDTO, principalDetails));
+    }
+
+    public PostIdResponse updatePost(PostUpdateDTO postUpdateDTO, PrincipalDetails principalDetails) {
+        postHelper.validateTitle(postUpdateDTO.title());
+        postHelper.validateContent(postUpdateDTO.content());
+        postHelper.isUpdatable(postUpdateDTO.id());
+
+        return postMapper.toPostIdResponse(postHelper.updatePost(postUpdateDTO, principalDetails));
     }
 }
