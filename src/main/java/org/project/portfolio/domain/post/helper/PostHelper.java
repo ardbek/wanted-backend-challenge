@@ -8,6 +8,7 @@ import org.project.portfolio.domain.post.dto.request.PostUpdateDTO;
 import org.project.portfolio.domain.post.exception.InvalidContentException;
 import org.project.portfolio.domain.post.exception.InvalidTitleException;
 import org.project.portfolio.domain.post.exception.PostNotFound;
+import org.project.portfolio.domain.post.exception.PostUpdateNotAllowed;
 import org.project.portfolio.domain.post.mapper.PostMapper;
 import org.project.portfolio.domain.post.repository.PostRepository;
 import org.project.portfolio.domain.user.domain.PrincipalDetails;
@@ -45,12 +46,12 @@ public class PostHelper {
     }
 
     public void isUpdatable(Long id) {
-        Optional<Post> post = postRepository.findById(id);
-        if(post.isEmpty()) {
-            throw PostNotFound.EXCEPTION;
-        }
+        Optional<Post> findPost = postRepository.findById(id);
+        Post post = findPost.orElseThrow(() -> PostNotFound.EXCEPTION);
 
-        
+        if (ValidationUtil.isUpdatable(post.getCreateAt())) {
+            throw PostUpdateNotAllowed.EXCEPTION;
+        }
     }
 
 }

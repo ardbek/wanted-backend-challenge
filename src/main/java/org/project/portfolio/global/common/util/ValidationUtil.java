@@ -1,5 +1,6 @@
 package org.project.portfolio.global.common.util;
 
+import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -35,6 +36,12 @@ public class ValidationUtil {
 
     public static boolean isValidContent(String content) {
         return content.length() <= MAX_CONTENT_LENGTH;
+    }
+
+    public static boolean isUpdatable(LocalDateTime createDate) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime tenDaysAfterCreateDate = createDate.plusDays(10);
+        return now.isBefore(tenDaysAfterCreateDate);
     }
 
 }

@@ -17,7 +17,7 @@ public class PostService {
     private final PostMapper postMapper;
 
     public PostIdResponse createPost(PostCreateDTO postCreateDTO, PrincipalDetails principalDetails) {
-        //유효성 검사
+        // 유효성 검사
         postHelper.validateTitle(postCreateDTO.title());
         postHelper.validateContent(postCreateDTO.content());
         
@@ -25,6 +25,7 @@ public class PostService {
     }
 
     public PostIdResponse updatePost(PostUpdateDTO postUpdateDTO, PrincipalDetails principalDetails) {
+        // 유효성 검사
         postHelper.validateTitle(postUpdateDTO.title());
         postHelper.validateContent(postUpdateDTO.content());
         postHelper.isUpdatable(postUpdateDTO.id());
