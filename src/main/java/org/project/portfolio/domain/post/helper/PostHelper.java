@@ -4,6 +4,7 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.project.portfolio.domain.post.domain.Post;
 import org.project.portfolio.domain.post.dto.request.PostCreateDTO;
+import org.project.portfolio.domain.post.dto.request.PostSearchRequestDTO;
 import org.project.portfolio.domain.post.dto.request.PostUpdateDTO;
 import org.project.portfolio.domain.post.exception.InvalidContentException;
 import org.project.portfolio.domain.post.exception.InvalidTitleException;
@@ -54,4 +55,7 @@ public class PostHelper {
         }
     }
 
+    public Object getPostList(PostSearchRequestDTO searchRequestDTO) {
+        return postRepository.getPostsVoList(searchRequestDTO);
+    }
 }
